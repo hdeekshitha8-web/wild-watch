@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WildWatch - Endangered Species</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f9f4;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px;
+            background: #2e7d32;
+            color: white;
+        }
+
+        .search-section {
+            text-align: center;
+            margin: 20px;
+        }
+
+        #searchInput {
+            width: 60%;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        .species-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .card {
+            width: 250px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 15px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            background: #2e7d32;
+            color: white;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>🌍 WildWatch</h1>
+        <p>Explore endangered species and learn how to protect them</p>
+    </header>
+
+    <section class="search-section">
+        <input type="text" id="searchInput" placeholder="Search species...">
+    </section>
+
+    <section id="speciesContainer" class="species-container">
+        <!-- Species cards will be inserted here by JavaScript -->
+    </section>
+
+    <footer>
+        <p>WildWatch © 2025 | Protect Wildlife, Protect Earth</p>
+    </footer>
+
+    <script>
+        const speciesData = [
+            {
+                name: "Amur Leopard",
+                status: "Critically Endangered",
+                habitat: "Temperate forests",
+                img: "https://upload.wikimedia.org/wikipedia/commons/0/0c/Amur_Leopard_in_San_Diego_Zoo.jpg"
+            },
+            {
+                name: "Black Rhino",
+                status: "Critically Endangered",
+                habitat: "African savannas",
+                img: "https://upload.wikimedia.org/wikipedia/commons/0/0f/Black_Rhino.jpg"
+            },
+            {
+                name: "Hawksbill Turtle",
+                status: "Critically Endangered",
+                habitat: "Tropical oceans",
+                img: "https://upload.wikimedia.org/wikipedia/commons/1/1e/Hawksbill_turtle.jpg"
+            }
+        ];
+
+        const container = document.getElementById("speciesContainer");
+        const searchInput = document.getElementById("searchInput");
+
+        function displaySpecies(list) {
+            container.innerHTML = "";
+            list.forEach(species => {
+                container.innerHTML += `
+                    <div class="card">
+                        <img src="${species.img}" alt="${species.name}">
+                        <div class="card-content">
+                            <h3>${species.name}</h3>
+                            <p><strong>Status:</strong> ${species.status}</p>
+                            <p><strong>Habitat:</strong> ${species.habitat}</p>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        searchInput.addEventListener("input", () => {
+            const value = searchInput.value.toLowerCase();
+            const filtered = speciesData.filter(s => s.name.toLowerCase().includes(value));
+            displaySpecies(filtered);
+        });
+
+        displaySpecies(speciesData);
+    </script>
+
+</body>
+</html>
